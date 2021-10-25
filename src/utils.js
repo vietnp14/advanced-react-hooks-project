@@ -51,6 +51,7 @@ function useAsync(initialState) {
       promise.then(
         data => {
           dispatch({type: 'resolved', data})
+          console.log('Zo run useAsync : ', data);
         },
         error => {
           dispatch({type: 'rejected', error})

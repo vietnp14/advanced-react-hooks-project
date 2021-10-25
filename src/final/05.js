@@ -17,13 +17,11 @@ const MessagesDisplay = React.forwardRef(function MessagesDisplay(
   function scrollToBottom() {
     containerRef.current.scrollTop = containerRef.current.scrollHeight
   }
-  React.useImperativeHandle(ref, () => ({
-    scrollToTop,
-    scrollToBottom,
-  }))
+
+  React.useImperativeHandle(ref, () => scrollToBottom)
 
   return (
-    <div ref={containerRef} role="log">
+    <div ref={containerRef} role="log" style={{ scrollBehavior: 'smooth' }}>
       {messages.map((message, index, array) => (
         <div key={message.id}>
           <strong>{message.author}</strong>: <span>{message.content}</span>
@@ -46,12 +44,12 @@ function App() {
       ? setMessages(allMessages.slice(0, messages.length - 1))
       : null
 
-  const scrollToTop = () => messageDisplayRef.current.scrollToTop()
-  const scrollToBottom = () => messageDisplayRef.current.scrollToBottom()
-
+  const scrollToTop = () => {messageDisplayRef.current.scrollToTop(); messages.push({ asd: 'asdas' })}
+  const scrollToBottom = () => messageDisplayRef.current();
+  console.log(messageDisplayRef)
   return (
     <div className="messaging-app">
-      <div style={{display: 'flex', justifyContent: 'space-between'}}>
+      <div style={{display: 'flex', justifyContent: 'space-between', scrollBehavior: 'smooth'}}>
         <button onClick={addMessage}>add message</button>
         <button onClick={removeMessage}>remove message</button>
       </div>

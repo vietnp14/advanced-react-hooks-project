@@ -11,7 +11,10 @@ function Counter({initialCount = 0, step = 1}) {
     count: initialCount,
   })
   const {count} = state
-  const increment = () => setState({count: count + step})
+  const increment = () => {
+    console.log('Re-render');
+    return setState({count: count + step});
+  }
   return <button onClick={increment}>{count}</button>
 }
 
